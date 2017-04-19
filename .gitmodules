@@ -1,0 +1,3 @@
+[submodule "src/rust-clippy"]
+	path = src/rust-clippy
+	url = git@github.com:Manishearth/rust-clippy.git
