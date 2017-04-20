@@ -7,6 +7,3 @@ docker run -it -v $(pwd)/src:/src rust-clippy-build /bin/sh -c "cd rust-clippy &
 mkdir -p bin
 cp src/rust-clippy/target/release/cargo-clippy bin/
 cp src/codeclimate-clippy/target/release/codeclimate-clippy bin/
-
-docker rm $(docker ps -a -q --filter=ancestor=rust-clippy-build)
-docker rmi rust-clippy-build
