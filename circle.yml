@@ -15,3 +15,10 @@ dependencies:
 test:
   override:
     - ./test.sh
+
+deployment:
+  master:
+    branch: master
+    owner: bkchr
+    commands:
+      - ./deploy.sh
