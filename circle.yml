@@ -4,6 +4,10 @@ machine:
   services:
     - docker
 
+checkout:
+  post:
+    - git submodule update --recursive --init
+
 dependencies:
   override:
     - ./build.sh
