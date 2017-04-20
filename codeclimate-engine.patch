@@ -1,3 +1,40 @@
+diff --git a/Makefile b/Makefile
+index 7eb9ee5..bb54686 100644
+--- a/Makefile
++++ b/Makefile
+@@ -4,7 +4,7 @@ PREFIX ?= /usr/local
+ SKIP_ENGINES ?= 0
+ 
+ image:
+-	docker build -t codeclimate/codeclimate .
++	docker build -t codeclimate/codeclimate --rm=false .
+ 
+ test: image
+ 	docker run --rm -it \
+@@ -30,9 +30,8 @@ citest:
+ 	  --volume $(CIRCLE_TEST_REPORTS):/usr/src/app/spec/reports \
+ 	  codeclimate/codeclimate -c "bundle exec rake spec:all && bundle exec codeclimate-test-reporter && bundle exec rake spec:benchmark"
+ 
+-install:
++install: image
+ 	bin/check
+-	docker pull codeclimate/codeclimate:latest
+ 	@[ $(SKIP_ENGINES) -eq 1 ] || \
+ 	  docker images | \
+ 	  awk '/codeclimate\/codeclimate-/ { print $$1 }' | \
+diff --git a/codeclimate-wrapper b/codeclimate-wrapper
+index 2f2ac5c..c9c2d0f 100755
+--- a/codeclimate-wrapper
++++ b/codeclimate-wrapper
+@@ -54,7 +54,7 @@ done
+ 
+ docker_run() {
+   exec docker run \
+-    --interactive --rm \
++    --interactive \
+     --env CODECLIMATE_CODE \
+     --env CODECLIMATE_TMP \
+     --env CODECLIMATE_DEBUG \
 diff --git a/lib/cc/analyzer/engine.rb b/lib/cc/analyzer/engine.rb
 index 000e943..575e6ab 100644
 --- a/lib/cc/analyzer/engine.rb
