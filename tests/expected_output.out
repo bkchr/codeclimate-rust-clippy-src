@@ -1,0 +1,14 @@
+Starting analysis
+
+== src/lib.rs (9 issues) ==
+4-10: function is never used: `write` [rust-clippy]
+9: handle written amount returned or use `Write::write_all` instead, for further information visit https://github.com/Manishearth/rust-clippy/wiki#unused_io_amount [rust-clippy]
+12-20: function is never used: `while_let_loop` [rust-clippy]
+14-19: this loop could be written as a `while let` loop, try [rust-clippy]
+15: unused variable: `y` [rust-clippy]
+22-24: function is never used: `divide_by_zero` [rust-clippy]
+23: unused variable: `x` [rust-clippy]
+23: equal expressions as operands to `/`, for further information visit https://github.com/Manishearth/rust-clippy/wiki#eq_op [rust-clippy]
+23: attempt to divide by zero [rust-clippy]
+
+Analysis complete! Found 9 issues.

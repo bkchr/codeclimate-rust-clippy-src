@@ -26,17 +26,26 @@ RUN \
           python \
           libiberty-dev
 
-ADD install-rust.sh /root/
-RUN /root/install-rust.sh 
+RUN     mkdir -p /app/.cargo/bin
 
-ENV PATH=/root/.cargo/bin:$PATH
+ADD     ./bin/codeclimate-clippy /app/
+ADD     ./bin/cargo-clippy /app/.cargo/bin/
 
-RUN     mkdir /app
+ADD     ./main.sh /app/
 
-RUN     adduser -u 9000 -D -h /app app
+RUN     adduser --group -u 9000 --system --home /app app
 RUN     chown -R app:app /app
+
+RUN     mkdir -p /code-copy
+RUN     chown -R app:app /code-copy
 
 USER    app
 
+ADD     install-rust.sh /app/
+RUN     /app/install-rust.sh 
+ENV     PATH=/app/.cargo/bin:$PATH
+
 VOLUME  /code
 WORKDIR /code
+
+CMD     ["/app/main.sh"]

@@ -7,4 +7,4 @@ authors = ["Bastian Köcher <git@kchr.de>"]
 serde_json = "0.9"
 serde_derive = "0.9"
 serde = "0.9"
-derive-new = "0.4"
+derive-new = { git = "https://github.com/nrc/derive-new.git", rev = "6cfdc3cf76b3d7398b5890f27fb91ea2949d6408" }

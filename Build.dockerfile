@@ -26,10 +26,12 @@ RUN \
           python \
           libiberty-dev
 
-ADD install-rust.sh /root/
-RUN /root/install-rust.sh 
+ENV CARGO_HOME=/app/.cargo/
+ENV RUSTUP_HOME=/app/.rustup/
 
-ENV PATH=/root/.cargo/bin:$PATH
+ADD install-rust.sh /app/
+RUN /app/install-rust.sh 
 
+ENV PATH=/app/.cargo/bin:$PATH
 
 WORKDIR /src

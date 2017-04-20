@@ -1,0 +1,3 @@
+engines:
+  rust-clippy:
+    enabled: true
